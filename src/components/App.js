@@ -5,19 +5,19 @@ import dataList from './data.json';
 const App = () => {
   const [data, setData] = useState(dataList);
 
-  /*const renderClubs = () => {
+  const renderClubs = () => {
     return(
       dataList.map((data,index)=>{
         return(
           <li className="main__list--item" key={index}>
-            <h2>#0: Book club</h2>
-            <p>Abierto entre semana: Sí</p>
-            <p>Abierto el fin de semana: Sí</p>
+            <h2>{`#${index}: ${data.name}`}</h2>
+            <p>{`Abierto entre semana: ${data.openOnWeekdays===true ?'Sí':'No'}`}</p>
+            <p>{`Abierto el fin de semana: ${data.openOnWeekend===true ?'Sí':'No'}`}</p>
           </li>
         );
-      )}
+      })
     );
-  }*/
+  }
   return (
     <div className="App">
       <header className="header">
@@ -25,26 +25,7 @@ const App = () => {
       </header>
       <main>
         <ul className="main__list">
-          <li className="main__list--item">
-            <h2>#0: Book club</h2>
-            <p>Abierto entre semana: Sí</p>
-            <p>Abierto el fin de semana: Sí</p>
-          </li>
-          <li className="main__list--item">
-            <h2>#0: Book club</h2>
-            <p>Abierto entre semana: Sí</p>
-            <p>Abierto el fin de semana: Sí</p>
-          </li>
-          <li className="main__list--item">
-            <h2>#0: Book club</h2>
-            <p>Abierto entre semana: Sí</p>
-            <p>Abierto el fin de semana: Sí</p>
-          </li>
-          <li className="main__list--item">
-            <h2>#0: Book club</h2>
-            <p>Abierto entre semana: Sí</p>
-            <p>Abierto el fin de semana: Sí</p>
-          </li>
+         {renderClubs()}
         </ul>
         <h3>Añadir un nuevo club</h3>
         <form action="" className="form">
