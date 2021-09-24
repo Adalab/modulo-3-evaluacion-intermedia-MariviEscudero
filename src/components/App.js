@@ -43,7 +43,13 @@ const App = () => {
   return (
     <div className="App">
       <header className="header">
-        <h1>Mis clubs</h1>
+      <h1>Mis clubs</h1>
+      <label htmlFor="filterclub">Mostrar</label>
+        <select id="club" name="filterclub">
+          <option value="todos">todos</option>
+          <option value="los que abren entre semana">los que abren entre semana</option>
+          <option value="los que abren el fin de semana">los que abren el fin de semana</option>
+        </select>
       </header>
       <main>
         <ul className="main__list">
@@ -54,11 +60,11 @@ const App = () => {
           <label htmlFor="add-club">Nombre del club</label>
           <input name="add-club" type="text" value={clubName} onChange={handleClubName} />
           <label htmlFor="daily">
-            <input id="" type="checkbox" name="daily" onChange={handleOpenWeek}/>
+            <input value="daily" id="daily"type="checkbox" name="daily" onChange={handleOpenWeek}/>
             ¿Abre entre semana?
           </label>
           <label htmlFor="weekend">
-            <input id="" type="checkbox" name="weekend" onChange={handleOpenWeekend}/>
+            <input value="weekend" id="weekend" type="checkbox" name="weekend" onChange={handleOpenWeekend}/>
             ¿Abre los fines de semana?
           </label>
           <button onClick= {handleClick}>Añadir un nuevo club</button>
