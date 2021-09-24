@@ -17,17 +17,19 @@ const App = () => {
   const handleOpenWeekend = (ev) =>{
     setOpenWeekend(ev.target.checked);
   }
-  
+  const handleClick = (ev) =>{
+    ev.preventDefault();
+    const newClub = { 
+      "name": clubName,
+      "openOnWeekdays": openWeek,
+      "openOnWeekend": openWeekend,
+    }
+    setData([...data, newClub]);
+  }
 
   const renderClubs = () => {
     return(
-      data
-      /*.filter(() =>{
-        return(
-
-        )
-      })*/
-      .map((data,index)=>{
+      data.map((data,index)=>{
         return(
           <li className="main__list--item" key={index}>
             <h2>{`#${index}: ${data.name}`}</h2>
@@ -59,7 +61,7 @@ const App = () => {
             <input id="" type="checkbox" name="weekend" onChange={handleOpenWeekend}/>
             ¿Abre los fines de semana?
           </label>
-          <button>Añadir un nuevo club</button>
+          <button onClick= {handleClick}>Añadir un nuevo club</button>
         </form>
       </main>
     </div>
