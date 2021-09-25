@@ -7,7 +7,13 @@ const App = () => {
   const [clubName,setClubName] = useState('');
   const [openWeek, setOpenWeek] = useState(false);
   const [openWeekend, setOpenWeekend] = useState(false);
+  const [filterClub, setFilterClub] = useState('');
 
+  const handleFilterClub = (ev) =>{
+    setFilterClub(ev.target.value)
+    console.log(ev.target.value);
+  }
+ 
   const handleClubName = (ev) =>{
     setClubName(ev.target.value);
   }
@@ -29,7 +35,17 @@ const App = () => {
 
   const renderClubs = () => {
     return(
-      data.map((data,index)=>{
+      data
+      .filter(data => {
+        if(filterClub==='semana'){
+          return data.openOnWeekdays===true;
+        }else if(filterClub==='finde'){
+          return data.openOnWeekend===true;
+        }else{
+          return data;
+        }
+      })
+      .map((data,index)=>{
         return(
           <li className="main__list--item" key={index}>
             <h2>{`#${index}: ${data.name}`}</h2>
@@ -40,15 +56,16 @@ const App = () => {
       })
     );
   }
+
   return (
     <div className="App">
       <header className="header">
       <h1>Mis clubs</h1>
       <label htmlFor="filterclub">Mostrar</label>
-        <select id="club" name="filterclub">
-          <option value="todos">todos</option>
-          <option value="los que abren entre semana">los que abren entre semana</option>
-          <option value="los que abren el fin de semana">los que abren el fin de semana</option>
+        <select id="club" name="filterclub" value={filterClub} onChange={handleFilterClub}>
+          <option value="todos">Todos</option>
+          <option value="semana">Los que abren entre semana</option>
+          <option value="finde">Los que abren el fin de semana</option>
         </select>
       </header>
       <main>
