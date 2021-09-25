@@ -47,7 +47,8 @@ const App = () => {
       .map((data, index) => {
         return (
           <li className="main__list--item" key={index}>
-            <h2>{`#${index}: ${data.name}`}</h2>
+            <h2>{`#${index}: ${data.name} `}<i className="fas fa-times-circle"></i></h2>
+            
             <p>{`Abierto entre semana: ${
               data.openOnWeekdays === true ? 'Sí' : 'No'
             }`}</p>
