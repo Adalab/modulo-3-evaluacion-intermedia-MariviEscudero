@@ -12,7 +12,6 @@ const App = () => {
 
   const handleFilterClub = (ev) => {
     setFilterClub(ev.target.value);
-    console.log(ev.target.value);
   };
 
   const handleClubName = (ev) => {
@@ -33,11 +32,11 @@ const App = () => {
     };
     setData([...data, newClub]);
   };
-  const handleRemoveClub = (ev) =>{
+  const handleRemoveClub = (ev) => {
     setRemoveClub(ev.target.id);
-    data.splice(removeClub,1);
+    data.splice(removeClub, 1);
     setData([...data]);
-  }
+  };
 
   const renderClubs = () => {
     return data
@@ -54,17 +53,20 @@ const App = () => {
         return (
           <li className="main__list--item" key={index}>
             <h2>{`#${index}: ${data.name} `}</h2>
-            <i id={index} className="fas fa-times-circle" onClick={handleRemoveClub}></i>
+            <i
+              id={index}
+              className="fas fa-times-circle"
+              onClick={handleRemoveClub}
+            ></i>
             <p>{`Abierto entre semana: ${
-              data.openOnWeekdays === true ? 'Sí' : 'No'
+              data.openOnWeekdays ? 'Sí' : 'No'
             }`}</p>
             <p>{`Abierto el fin de semana: ${
-              data.openOnWeekend === true ? 'Sí' : 'No'
+              data.openOnWeekend ? 'Sí' : 'No'
             }`}</p>
           </li>
         );
       });
-    
   };
 
   return (
@@ -116,7 +118,7 @@ const App = () => {
           </div>
           <div className="label__format">
             <label className="label" htmlFor="weekend">
-              <input 
+              <input
                 className="input"
                 value="weekend"
                 id="weekend"
@@ -127,7 +129,9 @@ const App = () => {
               ¿Abre los fines de semana?
             </label>
           </div>
-          <button className="form__btn" onClick={handleClick}>Añadir un nuevo club</button>
+          <button className="form__btn" onClick={handleClick}>
+            Añadir un nuevo club
+          </button>
         </form>
       </main>
     </div>
