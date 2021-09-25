@@ -7,7 +7,8 @@ const App = () => {
   const [clubName, setClubName] = useState('');
   const [openWeek, setOpenWeek] = useState(false);
   const [openWeekend, setOpenWeekend] = useState(false);
-  const [filterClub, setFilterClub] = useState('');
+  const [filterClub, setFilterClub] = useState();
+  const [removeClub, setRemoveClub] = useState([]);
 
   const handleFilterClub = (ev) => {
     setFilterClub(ev.target.value);
@@ -32,6 +33,11 @@ const App = () => {
     };
     setData([...data, newClub]);
   };
+  const handleRemoveClub = (ev) =>{
+    setRemoveClub(ev.target.id);
+    data.splice(removeClub,1);
+    setData([...data]);
+  }
 
   const renderClubs = () => {
     return data
@@ -47,8 +53,8 @@ const App = () => {
       .map((data, index) => {
         return (
           <li className="main__list--item" key={index}>
-            <h2>{`#${index}: ${data.name} `}<i className="fas fa-times-circle"></i></h2>
-            
+            <h2>{`#${index}: ${data.name} `}</h2>
+            <i id={index} className="fas fa-times-circle" onClick={handleRemoveClub}></i>
             <p>{`Abierto entre semana: ${
               data.openOnWeekdays === true ? 'Sí' : 'No'
             }`}</p>
@@ -58,6 +64,7 @@ const App = () => {
           </li>
         );
       });
+    
   };
 
   return (
