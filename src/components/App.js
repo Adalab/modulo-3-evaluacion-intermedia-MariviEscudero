@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../styles/App.scss';
-import dataList from './data.json';
+import dataList from '../services/data.json';
 
 const App = () => {
   const [data, setData] = useState(dataList);
@@ -23,19 +23,24 @@ const App = () => {
   const handleOpenWeekend = (ev) => {
     setOpenWeekend(ev.target.checked);
   };
+ 
+  const handleRemoveClub = (ev) => {
+    setRemoveClub(ev.target.id);
+    data.splice(removeClub, 1);
+    setData([...data]);
+  };
+
   const handleClick = (ev) => {
     ev.preventDefault();
+    setClubName('');
+    setOpenWeekend(false);
+    setOpenWeek(false);
     const newClub = {
       name: clubName,
       openOnWeekdays: openWeek,
       openOnWeekend: openWeekend,
     };
     setData([...data, newClub]);
-  };
-  const handleRemoveClub = (ev) => {
-    setRemoveClub(ev.target.id);
-    data.splice(removeClub, 1);
-    setData([...data]);
   };
 
   const renderClubs = () => {
@@ -68,6 +73,8 @@ const App = () => {
         );
       });
   };
+
+ 
 
   return (
     <div className="App">
@@ -111,6 +118,7 @@ const App = () => {
                 id="daily"
                 type="checkbox"
                 name="daily"
+                checked={openWeek}
                 onChange={handleOpenWeek}
               />
               ¿Abre entre semana?
@@ -124,6 +132,7 @@ const App = () => {
                 id="weekend"
                 type="checkbox"
                 name="weekend"
+                checked={openWeekend}
                 onChange={handleOpenWeekend}
               />
               ¿Abre los fines de semana?
